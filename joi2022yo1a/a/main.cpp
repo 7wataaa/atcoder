@@ -46,8 +46,9 @@ template <class T> inline bool chmax(T &a, T b) {
   return false;
 }
 
-
 int main() {
-  
-}
+  ll x;
+  cin >> x;
 
+  cout << x % 21 << endl;
+}

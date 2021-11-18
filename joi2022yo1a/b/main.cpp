@@ -46,8 +46,9 @@ template <class T> inline bool chmax(T &a, T b) {
   return false;
 }
 
-
 int main() {
-  
-}
+  ll x, y, z;
+  cin >> x >> y >> z;
 
+  cout << ((x + y) <= z ? 1 : 0) << endl;
+}

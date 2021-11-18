@@ -46,8 +46,16 @@ template <class T> inline bool chmax(T &a, T b) {
   return false;
 }
 
-
 int main() {
-  
-}
+  ll n;
+  string s;
+  cin >> n >> s;
 
+  set<char> chars;
+
+  for (auto c : s) {
+    chars.ins(c);
+  }
+
+  cout << ((chars.size() >= 3 ? "Yes" : "No")) << endl;
+}

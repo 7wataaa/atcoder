@@ -46,8 +46,28 @@ template <class T> inline bool chmax(T &a, T b) {
   return false;
 }
 
-
 int main() {
-  
-}
+  ll n, m;
+  cin >> n >> m;
 
+  vector<ll> boxes(n);
+  vector<ll> keysVec(m);
+
+  rep(i, 0, n) { cin >> boxes[i]; }
+  rep(i, 0, m) { cin >> keysVec[i]; }
+
+  set<ll> keys(all(keysVec));
+
+  map<ll, ll> boxesMap;
+  for (auto box : boxes) {
+    boxesMap[box]++;
+  }
+
+  ll ans = 0;
+
+  for (auto key : keys) {
+    ans += boxesMap[key];
+  }
+
+  cout << ans << endl;
+}

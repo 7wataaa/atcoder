@@ -5,9 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "cpp - アクティブ ファイルのビルドとデバッグ",
+      "name": "C/C++: cpp アクティブなファイルのビルド",
       "type": "cppdbg",
       "request": "launch",
+      "preLaunchTask": "C/C++: cpp アクティブなファイルのビルド",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
       "args": [],
       "stopAtEntry": false,
@@ -22,7 +23,6 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "C/C++: cpp アクティブなファイルのビルド",
       "miDebuggerPath": "/usr/bin/gdb"
     }
   ]

@@ -9,19 +9,34 @@
       "id": "joi2021_yo1b_a",
       "label": "A",
       "title": "帰省 (Homecoming)",
-      "url": "https://atcoder.jp/contests/joi2021yo1b/tasks/joi2021_yo1b_a"
+      "url": "https://atcoder.jp/contests/joi2021yo1b/tasks/joi2021_yo1b_a",
+      "directory": {
+        "path": "a",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
     },
     {
       "id": "joi2021_yo1b_b",
       "label": "B",
       "title": "ビ太郎と IOI (Bitaro and IOI)",
-      "url": "https://atcoder.jp/contests/joi2021yo1b/tasks/joi2021_yo1b_b"
+      "url": "https://atcoder.jp/contests/joi2021yo1b/tasks/joi2021_yo1b_b",
+      "directory": {
+        "path": "b",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
     },
     {
       "id": "joi2021_yo1b_c",
       "label": "C",
       "title": "分割 (Split)",
-      "url": "https://atcoder.jp/contests/joi2021yo1b/tasks/joi2021_yo1b_c"
+      "url": "https://atcoder.jp/contests/joi2021yo1b/tasks/joi2021_yo1b_c",
+      "directory": {
+        "path": "c",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
     }
   ]
 }

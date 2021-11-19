@@ -5,18 +5,13 @@ using ll = long long int;
 
 template <class T> using V = std::vector<T>;
 
-// template <typename T>
-// class V : public vector<T> {
-
-// };
-
 template <typename T>
 std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
   for (ll i = 0; i < v.size(); i++) {
     stream << v[i];
 
     if (i != v.size() - 1) {
-      stream << += ' ';
+      stream << ' ';
     }
   }
 
@@ -33,6 +28,7 @@ std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
 #define sc second
 #define pb push_back
 #define ins insert
+#define Endl endl
 
 const ll NUMBER = 1000000007;
 const int d[5] = {0, 1, 0, -1, 0};
@@ -65,15 +61,41 @@ template <class T> inline bool chmax(T &a, T b) {
 }
 
 int main() {
-  V<ll> v1 = {1, 2, 3, 4, 5};
-  V<char> v2 = {'a', 'b', 'c', 'd', 'e'};
+  ll n;
+  cin >> n;
 
-  V<ll> _v3(5, 5);
-  V<V<ll>> v3(5, _v3);
+  // 出現した整数, 出現回数
+  map<ll, ll> m;
 
-  cout << v1 << endl;
+  set<ll> nums;
 
-  cout << v2 << endl;
+  rep(i, 0, n) {
+    ll a;
+    cin >> a;
 
-  cout << v3 << endl;
+    m[a]++;
+
+    nums.ins(a);
+  }
+
+  // m[nums]を見ていって、最小の出現回数をもつ出現した整数たちを求める
+
+  ll minAppearedNum = __LONG_LONG_MAX__;
+
+  for (auto [key, value] : m) {
+    minAppearedNum = min(minAppearedNum, value);
+  }
+
+  // 最小出現回数を持つ要素たち
+  V<pair<ll, ll>> vec;
+
+  for (auto [key, value] : m) {
+    if (value == minAppearedNum) {
+      vec.pb({key, value});
+    }
+  }
+
+  sort(all(vec));
+
+  cout << vec.front().first << endl;
 }

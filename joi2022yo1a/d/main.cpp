@@ -17,6 +17,7 @@ template <class T> using V = std::vector<T>;
 #define ins insert
 
 const ll NUMBER = 1000000007;
+const int d[5] = {0, 1, 0, -1, 0};
 
 int ctoi(char c) {
   if (c >= '0' && c <= '9') {
@@ -45,46 +46,27 @@ template <class T> inline bool chmax(T &a, T b) {
   return false;
 }
 
-V<bool> seen;
-void dfs(const V<pair<ll, V<ll>>> &G, ll v) {
-  seen[v] = true;
-
-  for (auto next_v : G[v].sc) {
-    if (seen[next_v]) {
-      continue;
-    }
-
-    dfs(G, next_v);
-  }
-}
-
 int main() {
-  ll n;
-  cin >> n;
+  ll n, m;
+  cin >> n >> m;
 
-  V<pair<ll, V<ll>>> vec(n);
+  vector<ll> boxes(n);
+  vector<ll> keysVec(m);
 
-  rep(i, 0, n) {
-    ll t, k;
-    cin >> t >> k;
-    V<ll> v(k);
-    rep(j, 0, k) {
-      ll a;
-      cin >> a;
-      v[j] = a - 1;
-    }
+  rep(i, 0, n) { cin >> boxes[i]; }
+  rep(i, 0, m) { cin >> keysVec[i]; }
 
-    vec[i] = {t, v};
+  set<ll> keys(all(keysVec));
+
+  map<ll, ll> boxesMap;
+  for (auto box : boxes) {
+    boxesMap[box]++;
   }
-
-  set<ll> s;
 
   ll ans = 0;
 
-  seen.assign(n, false);
-
-  for (auto &x : s) {
-    ans += x;
+  for (auto key : keys) {
+    ans += boxesMap[key];
   }
 
   cout << ans << endl;

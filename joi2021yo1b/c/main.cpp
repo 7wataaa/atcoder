@@ -5,6 +5,26 @@ using ll = long long int;
 
 template <class T> using V = std::vector<T>;
 
+template <typename T>
+std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
+  for (ll i = 0; i < v.size(); i++) {
+    stream << v[i];
+
+    if (i != v.size() - 1) {
+      stream << ' ';
+    }
+  }
+
+  return stream;
+}
+
+template <typename T, typename V>
+std::ostream &operator<<(std::ostream &stream, const pair<T, V> p) {
+  stream << "(" << p.first << ", " << p.second << ")";
+
+  return stream;
+}
+
 #define _GLIBCXX_DEBUG
 
 #define rep(i, m, n) for (ll i = (m); (i) < (ll)(n); ++(i))
@@ -17,6 +37,7 @@ template <class T> using V = std::vector<T>;
 #define ins insert
 
 const ll NUMBER = 1000000007;
+const int d[5] = {0, 1, 0, -1, 0};
 
 int ctoi(char c) {
   if (c >= '0' && c <= '9') {
@@ -45,47 +66,32 @@ template <class T> inline bool chmax(T &a, T b) {
   return false;
 }
 
-V<bool> seen;
-void dfs(const V<pair<ll, V<ll>>> &G, ll v) {
-  seen[v] = true;
-
-  for (auto next_v : G[v].sc) {
-    if (seen[next_v]) {
-      continue;
-    }
-
-    dfs(G, next_v);
+ll vecnum(V<ll> v) {
+  ll result = 0;
+  for (auto i : v) {
+    result += i;
   }
+  return result;
 }
 
 int main() {
   ll n;
   cin >> n;
 
-  V<pair<ll, V<ll>>> vec(n);
+  V<ll> vec(n);
+
+  ll maxA = -1;
 
   rep(i, 0, n) {
-    ll t, k;
-    cin >> t >> k;
-    V<ll> v(k);
-    rep(j, 0, k) {
-      ll a;
-      cin >> a;
-      v[j] = a - 1;
-    }
-
-    vec[i] = {t, v};
+    ll a;
+    cin >> a;
+    vec[i] = a;
+    maxA = max(a, maxA);
   }
 
-  set<ll> s;
+  V<ll> v1(vec.begin(), find(all(vec), maxA));
+  V<ll> v2(find(all(vec), maxA) + 1, vec.end());
 
-  ll ans = 0;
-
-  seen.assign(n, false);
-
-  for (auto &x : s) {
-    ans += x;
-  }
-
-  cout << ans << endl;
+  cout << vecnum(v1) << endl;
+  cout << vecnum(v2) << endl;
 }

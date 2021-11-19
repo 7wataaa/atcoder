@@ -1,0 +1,95 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+using ll = long long int;
+
+template <class T> using V = std::vector<T>;
+
+#define _GLIBCXX_DEBUG
+
+#define rep(i, m, n) for (ll i = (m); (i) < (ll)(n); ++(i))
+
+#define endl '\n'
+#define all(a) (a).begin(), (a).end()
+#define fs first
+#define sc second
+#define pb push_back
+#define ins insert
+
+const ll NUMBER = 1000000007;
+const int d[5] = {0, 1, 0, -1, 0};
+
+int ctoi(char c) {
+  if (c >= '0' && c <= '9') {
+    return c - '0';
+  }
+  return 0;
+}
+
+bool isSameCharAll(string str) {
+  return (str.find_first_not_of(str[0]) == string::npos);
+}
+
+template <class T> inline bool chmin(T &a, T b) {
+  if (a > b) {
+    a = b;
+    return true;
+  }
+  return false;
+}
+
+template <class T> inline bool chmax(T &a, T b) {
+  if (a < b) {
+    a = b;
+    return true;
+  }
+  return false;
+}
+
+int main() {
+  ll n, m;
+  cin >> n >> m;
+
+  ll startX, startY;
+  cin >> startX >> startY;
+  // {縦、横}
+  pair<ll, ll> start = {startY - 1, startX - 1};
+
+  ll goalX, goalY;
+  cin >> goalX >> goalY;
+  // {縦、横}
+  pair<ll, ll> goal = {goalY - 1, goalX - 1};
+
+  V<V<char>> vec(n);
+
+  rep(i, 0, n) {
+    V<char> v(m);
+    rep(j, 0, m) { cin >> v[j]; }
+    vec[i] = v;
+  }
+
+  V<ll> _initRow(m, -1);
+  V<V<ll>> dist(n, _initRow);
+  dist[start.fs][start.sc] = 0;
+
+  queue<pair<ll, ll>> q;
+  q.push(start);
+
+  while (!q.empty()) {
+    pair<ll, ll> point = q.front();
+    q.pop();
+    for (ll i = 0; i < 4; i++) {
+      if (vec[point.fs + d[i + 1]][point.sc + d[i]] == '#')
+        continue;
+
+      if (dist[point.fs + d[i + 1]][point.sc + d[i]] != -1)
+        continue;
+
+      dist[point.fs + d[i + 1]][point.sc + d[i]] = dist[point.fs][point.sc] + 1;
+
+      q.push({point.fs + d[i + 1], point.sc + d[i]});
+    }
+  }
+
+  cout << dist[goal.sc][goal.fs] << endl;
+}

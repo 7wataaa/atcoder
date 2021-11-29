@@ -3,9 +3,10 @@
   "tasks": [
     {
       "type": "cppbuild",
-      "label": "C/C++: cpp アクティブなファイルのビルド",
-      "command": "/usr/bin/g++",
+      "label": "C/C++: g++ アクティブなファイルのビルド",
+      "command": "/usr/local/bin/g++",
       "args": [
+        "-std=gnu++17",
         "-fdiagnostics-color=always",
         "-g",
         "${file}",
@@ -15,11 +16,9 @@
       "options": {
         "cwd": "${fileDirname}"
       },
-      "problemMatcher": [
-        "$gcc"
-      ],
+      "problemMatcher": ["$gcc"],
       "group": "build",
-      "detail": "コンパイラ: /usr/bin/cpp"
+      "detail": "コンパイラ: /usr/local/bin/g++"
     }
   ]
 }

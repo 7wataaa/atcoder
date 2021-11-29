@@ -108,35 +108,49 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  ll q;
-  cin >> q;
+  ll n, w;
+  cin >> n >> w;
 
-  V<pair<ll, ll>> queries(q);
-  rep(i, 0, q) {
-    ll t, x;
-    cin >> t >> x;
+  V<pair<ll, ll>> vec(n);
 
-    queries[i] = {t, x};
+  for (ll i = 0; i < n; i++) {
+    ll a, b;
+    cin >> a >> b;
+    vec[i] = {a, b};
   }
 
-  const ll n = pow(2, 20);
+  sort(all(vec), greater<pair<ll, ll>>());
 
-  V<ll> A(n, -1);
+  queue<pair<ll, ll>> q;
 
-  rep(i, 0, n) { par.pb(i); }
+  for (auto p : vec) {
+    q.push(p);
+  }
 
-  for (ll i = 0; i < q; i++) {
-    auto [t, x] = queries[i];
+  ll deliciousPoint = 0;
+  ll weight = 0;
 
-    if (t == 2) {
-      cout << A[x % n] << endl;
-      continue;
+  do {
+    if (q.front().sc <= w - weight) {
+      deliciousPoint += q.front().fs * q.front().sc;
+      weight += q.front().sc;
+      q.pop();
+    } else {
+      ll d = w - weight;
+
+      if (d == 0) {
+        break;
+      }
+
+      deliciousPoint += q.front().fs * d;
+      weight += d;
+      q.front().sc = q.front().sc - d;
     }
 
-    ll h = (findRoot(x) + 1) % n;
+    if (q.empty()) {
+      break;
+    }
+  } while (weight <= w);
 
-    A[h] = x;
-
-    uniteRoot(h, x);
-  }
+  cout << deliciousPoint << endl;
 }

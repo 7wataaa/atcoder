@@ -108,35 +108,6 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  ll q;
-  cin >> q;
-
-  V<pair<ll, ll>> queries(q);
-  rep(i, 0, q) {
-    ll t, x;
-    cin >> t >> x;
-
-    queries[i] = {t, x};
-  }
-
-  const ll n = pow(2, 20);
-
-  V<ll> A(n, -1);
-
-  rep(i, 0, n) { par.pb(i); }
-
-  for (ll i = 0; i < q; i++) {
-    auto [t, x] = queries[i];
-
-    if (t == 2) {
-      cout << A[x % n] << endl;
-      continue;
-    }
-
-    ll h = (findRoot(x) + 1) % n;
-
-    A[h] = x;
-
-    uniteRoot(h, x);
-  }
+  
 }
+

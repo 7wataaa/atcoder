@@ -8,7 +8,7 @@
       "name": "C/C++: cpp アクティブなファイルのビルド",
       "type": "cppdbg",
       "request": "launch",
-      "preLaunchTask": "C/C++: cpp アクティブなファイルのビルド",
+      "preLaunchTask": "C/C++: g++ アクティブなファイルのビルド",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
       "args": [],
       "stopAtEntry": false,
@@ -24,6 +24,27 @@
         }
       ],
       "miDebuggerPath": "/usr/bin/gdb"
+    },
+    {
+      "name": "MacOS: C/C++: cpp アクティブなファイルのビルド",
+      "type": "cppdbg",
+      "request": "launch",
+      "preLaunchTask": "C/C++: g++ アクティブなファイルのビルド",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "gdb の再フォーマットを有効にする",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "miDebuggerPath": "/usr/local/bin/gdb"
     }
   ]
 }

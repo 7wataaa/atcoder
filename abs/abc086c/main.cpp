@@ -108,16 +108,37 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  string s;
-  ll k;
-  cin >> s >> k;
+  ll n;
+  cin >> n;
 
-  V<ll> ruiseki(s.size() + 1);
+  V<tuple<ll, ll, ll>> vec(n + 1);
 
-  rep(i, 0, s.size()) {
-    // true == 1
-    ruiseki[i + 1] = ruiseki[i] + (s[i] == '.');
+  vec[0] = {0, 0, 0};
+
+  rep(i, 0, n) {
+    ll t, x, y;
+    cin >> t >> x >> y;
+    vec[i + 1] = {t, x, y};
   }
 
-  cout << endl;
+  for (ll i = 1; i < vec.size(); i++) {
+    ll xdiff = abs(get<1>(vec[i]) - get<1>(vec[i - 1]));
+    ll ydiff = abs(get<2>(vec[i]) - get<2>(vec[i - 1]));
+    ll shortestDistance = xdiff + ydiff;
+    ll duration = get<0>(vec[i]) - get<0>(vec[i - 1]);
+
+    // そもそもその場所に着けるか
+    if (shortestDistance > duration) {
+      cout << "No" << endl;
+      return 0;
+    }
+
+    // その場所にぴったり付けるか
+    if ((shortestDistance % 2) != (duration % 2)) {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+
+  cout << "Yes" << endl;
 }

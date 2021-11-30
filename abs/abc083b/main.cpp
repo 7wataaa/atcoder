@@ -108,16 +108,25 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  string s;
-  ll k;
-  cin >> s >> k;
+  ll n, a, b;
+  cin >> n >> a >> b;
 
-  V<ll> ruiseki(s.size() + 1);
+  ll ans = 0;
 
-  rep(i, 0, s.size()) {
-    // true == 1
-    ruiseki[i + 1] = ruiseki[i] + (s[i] == '.');
+  for (ll i = 1; i <= n; i++) {
+    ll x = i;
+
+    ll sum = 0;
+
+    while (x != 0) {
+      sum += x % 10;
+      x /= 10;
+    }
+
+    if (a <= sum && sum <= b) {
+      ans += i;
+    }
   }
 
-  cout << endl;
+  cout << ans << endl;
 }

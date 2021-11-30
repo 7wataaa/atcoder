@@ -108,16 +108,21 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  string s;
-  ll k;
-  cin >> s >> k;
+  ll n;
+  cin >> n;
 
-  V<ll> ruiseki(s.size() + 1);
+  V<ll> vec(n);
+  rep(i, 0, n) { cin >> vec[i]; }
 
-  rep(i, 0, s.size()) {
-    // true == 1
-    ruiseki[i + 1] = ruiseki[i] + (s[i] == '.');
+  sort(all(vec), greater<ll>());
+
+  ll ans = 0;
+
+  for (ll i = 0; i < n; i++) {
+    ll a = vec[i];
+
+    ans += (i % 2 == 0 ? a : -a);
   }
 
-  cout << endl;
+  cout << ans << endl;
 }

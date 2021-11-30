@@ -109,15 +109,24 @@ ll pow_mod(ll n, ll k, ll mod) {
 
 int main() {
   string s;
-  ll k;
-  cin >> s >> k;
+  cin >> s;
 
-  V<ll> ruiseki(s.size() + 1);
+  ll i = s.size() - 1;
 
-  rep(i, 0, s.size()) {
-    // true == 1
-    ruiseki[i + 1] = ruiseki[i] + (s[i] == '.');
+  while (i > -1) {
+    if (i >= 4 && s.substr(i - 4, 5) == "dream") {
+      i -= 5;
+    } else if (i >= 4 && s.substr(i - 4, 5) == "erase") {
+      i -= 5;
+    } else if (i >= 5 && s.substr(i - 5, 6) == "eraser") {
+      i -= 6;
+    } else if (i >= 6 && s.substr(i - 6, 7) == "dreamer") {
+      i -= 7;
+    } else {
+      cout << "NO" << endl;
+      return 0;
+    }
   }
 
-  cout << endl;
+  cout << "YES" << endl;
 }

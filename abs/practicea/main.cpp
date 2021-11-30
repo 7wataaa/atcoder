@@ -108,16 +108,6 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  string s;
-  ll k;
-  cin >> s >> k;
-
-  V<ll> ruiseki(s.size() + 1);
-
-  rep(i, 0, s.size()) {
-    // true == 1
-    ruiseki[i + 1] = ruiseki[i] + (s[i] == '.');
-  }
-
-  cout << endl;
+  
 }
+

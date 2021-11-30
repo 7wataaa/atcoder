@@ -107,17 +107,27 @@ ll pow_mod(ll n, ll k, ll mod) {
   return result;
 }
 
+ll func(ll x) {
+  ll result = 0;
+  while (x % 2 == 0) {
+    x /= 2;
+    result++;
+  }
+  return result;
+}
+
 int main() {
-  string s;
-  ll k;
-  cin >> s >> k;
+  ll n;
+  cin >> n;
 
-  V<ll> ruiseki(s.size() + 1);
+  ll ans = LONG_LONG_MAX;
 
-  rep(i, 0, s.size()) {
-    // true == 1
-    ruiseki[i + 1] = ruiseki[i] + (s[i] == '.');
+  rep(i, 0, n) {
+    ll a;
+    cin >> a;
+
+    ans = min(ans, func(a));
   }
 
-  cout << endl;
+  cout << ans << endl;
 }

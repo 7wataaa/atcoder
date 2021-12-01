@@ -3,8 +3,7 @@
 using namespace std;
 using ll = long long int;
 
-template <class T>
-using V = std::vector<T>;
+template <class T> using V = std::vector<T>;
 
 template <typename T>
 std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
@@ -51,8 +50,7 @@ bool isSameCharAll(string str) {
   return (str.find_first_not_of(str[0]) == string::npos);
 }
 
-template <class T>
-inline bool chmin(T &a, T b) {
+template <class T> inline bool chmin(T &a, T b) {
   if (a > b) {
     a = b;
     return true;
@@ -60,8 +58,7 @@ inline bool chmin(T &a, T b) {
   return false;
 }
 
-template <class T>
-inline bool chmax(T &a, T b) {
+template <class T> inline bool chmax(T &a, T b) {
   if (a < b) {
     a = b;
     return true;
@@ -69,7 +66,66 @@ inline bool chmax(T &a, T b) {
   return false;
 }
 
-int main() {
-  
+bool isGoodCake(string &cake) {
+  for (ll i = 1; i < cake.size(); i++) {
+    if (cake[i] < cake[i - 1]) {
+      return false;
+    };
+  }
+  return true;
 }
 
+int main() {
+  ll n, q;
+  cin >> n >> q;
+
+  V<string> cakes(q);
+  rep(i, 0, q) {
+    string s;
+    cin >> s;
+    cakes[i] = s;
+  }
+
+  for (auto cake : cakes) {
+    queue<pair<string, ll>> todo;
+    todo.push({cake, 0});
+
+    map<string, bool> dist;
+
+    if (isGoodCake(cake)) {
+      cout << 0 << endl;
+      continue;
+    }
+
+    while (!todo.empty()) {
+      auto c = todo.front();
+      todo.pop();
+
+      if (dist[c.fs]) {
+        continue;
+      }
+
+      dist[c.fs] = true;
+
+      for (ll i = 0; i < c.fs.size() - 1; i++) {
+        string _s(c.fs.begin(), c.fs.end() - i);
+        string _rs(_s.rbegin(), _s.rend());
+        string _s2 =
+            c.fs.substr(c.fs.size() - i, c.fs.size() - (c.fs.size() - i));
+        string s = _rs + _s2;
+
+        if (dist[s]) {
+          continue;
+        }
+
+        if (isGoodCake(s)) {
+          cout << c.sc + 1 << endl;
+          todo = {};
+          break;
+        }
+
+        todo.push({s, c.sc + 1});
+      }
+    }
+  }
+}

@@ -108,6 +108,28 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  
-}
+  ll n, m;
+  cin >> n >> m;
 
+  V<pair<ll, ll>> vec(n);
+  rep(i, 0, n) {
+    ll w, u;
+    cin >> w >> u;
+
+    vec[i] = {w, u};
+  }
+
+  V<V<ll>> dp(n + 1, V<ll>(m + 1, 0));
+
+  for (ll i = 0; i < n; i++) {
+    for (ll w = 0; w <= m; w++) {
+      if (w - vec[i].fs >= 0) {
+        dp[i + 1][w] = max(dp[i][w - vec[i].fs] + vec[i].sc, dp[i][w]);
+      } else {
+        dp[i + 1][w] = dp[i][w];
+      }
+    }
+  }
+
+  cout << dp[n][m] << endl;
+}

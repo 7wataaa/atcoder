@@ -108,6 +108,36 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  
-}
+  ll n, W;
+  cin >> n >> W;
 
+  V<pair<ll, ll>> vec(n);
+  for (ll i = 0; i < n; i++) {
+    ll weight, value;
+    cin >> weight >> value;
+    vec[i] = {weight, value};
+  }
+
+  const ll _init = LONG_LONG_MAX - pow(10, 10) - 10;
+
+  V<V<ll>> dp(n + 1, V<ll>(pow(10, 3), _init));
+
+  dp[0][0] = 0;
+
+  for (ll i = 0; i < n; i++) {
+    for (ll v = 0; v <= pow(10, 3); v++) {
+      if (v - vec[i].sc >= 0) {
+        dp[i + 1][v] = min(dp[i][v], dp[i][v - vec[i].sc] + vec[i].fs);
+      } else {
+        dp[i + 1][v] = dp[i][v];
+      }
+    }
+  }
+
+  for (ll i = dp[n].size() - 1; i >= 0; i--) {
+    if (dp[n][i] <= W) {
+      cout << i << endl;
+      return 0;
+    }
+  }
+}

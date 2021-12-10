@@ -3,8 +3,7 @@
 using namespace std;
 using ll = long long int;
 
-template <class T>
-using V = std::vector<T>;
+template <class T> using V = std::vector<T>;
 
 template <typename T>
 std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
@@ -51,8 +50,7 @@ bool isSameCharAll(string str) {
   return (str.find_first_not_of(str[0]) == string::npos);
 }
 
-template <class T>
-inline bool chmin(T &a, T b) {
+template <class T> inline bool chmin(T &a, T b) {
   if (a > b) {
     a = b;
     return true;
@@ -60,8 +58,7 @@ inline bool chmin(T &a, T b) {
   return false;
 }
 
-template <class T>
-inline bool chmax(T &a, T b) {
+template <class T> inline bool chmax(T &a, T b) {
   if (a < b) {
     a = b;
     return true;
@@ -70,6 +67,38 @@ inline bool chmax(T &a, T b) {
 }
 
 int main() {
-  
-}
+  ll n, k;
+  cin >> n >> k;
 
+  V<ll> locations(n);
+  V<ll> inspections(n);
+
+  rep(i, 0, n) {
+    ll a;
+    cin >> a;
+    locations[i] = a;
+  }
+
+  rep(i, 0, n) {
+    ll b;
+    cin >> b;
+    inspections[i] = b;
+  }
+
+  ll ans = 0;
+
+  for (ll i = 0; i < locations.size(); i++) {
+    if (i == 0) {
+      ans += locations[i];
+      continue;
+    }
+
+    ans += locations[i] - locations[i - 1];
+  }
+
+  for (auto e : inspections) {
+    ans += e;
+  }
+
+  cout << ans << endl;
+}

@@ -30,7 +30,7 @@
       "type": "cppdbg",
       "request": "launch",
       "preLaunchTask": "C/C++: g++ アクティブなファイルのビルド",
-      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "program": "${fileDirname}/a.out",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",

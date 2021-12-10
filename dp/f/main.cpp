@@ -108,6 +108,50 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  
-}
+  string s, t;
+  cin >> s >> t;
 
+  s.ins(0, " ");
+  t.ins(0, " ");
+
+  if (s.size() > t.size()) {
+    swap(s, t);
+  }
+
+  V<V<ll>> dp(s.size(), V<ll>(t.size(), 0));
+
+  for (ll i = 1; i < s.size(); i++) {
+    for (ll j = 1; j < t.size(); j++) {
+      // 文字が同じなら1、違ったら0
+      ll same = s[i] == t[j];
+
+      dp[i][j] = max({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1] + same});
+    }
+  }
+
+  string rans;
+
+  ll y = s.size() - 1;
+  ll x = t.size() - 1;
+
+  while (x > 0 && y > 0) {
+    ll top = dp[y - 1][x];
+    ll topLeft = dp[y - 1][x - 1];
+    ll left = dp[y][x - 1];
+    ll current = dp[y][x];
+
+    if (top == current) {
+      y--;
+    } else if (left == current) {
+      x--;
+    } else if (topLeft == current - 1) {
+      rans.push_back(t[x]);
+      x--;
+      y--;
+    }
+  }
+
+  string ans(rans.rbegin(), rans.rend());
+
+  cout << ans << endl;
+}

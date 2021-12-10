@@ -108,6 +108,53 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  
-}
+  ll h, w;
+  cin >> h >> w;
 
+  ll mod = pow(10, 9) + 7;
+
+  V<V<char>> vec(h, V<char>(w));
+
+  rep(i, 0, h) {
+    rep(j, 0, w) {
+      char c;
+      cin >> c;
+      vec[i][j] = c;
+    }
+  }
+
+  V<V<ll>> dp(h, V<ll>(w, 0));
+  dp[0][0] = 1;
+
+  for (ll i = 0; i < h; i++) {
+    for (ll j = 0; j < w; j++) {
+      // 判定する場所が黒マスだったら-1
+      if (vec[i][j] == '#') {
+        dp[i][j] = 0;
+        continue;
+      }
+
+      bool isXOutside = j - 1 < 0;
+      bool isYOutside = i - 1 < 0;
+
+      if (isYOutside && isXOutside) {
+        continue;
+      } else if (isYOutside && !isXOutside) {
+        ll left = dp[i][j - 1];
+
+        dp[i][j] = left % mod;
+      } else if (!isYOutside && isXOutside) {
+        ll top = dp[i - 1][j];
+
+        dp[i][j] = top % mod;
+      } else {
+        ll left = dp[i][j - 1];
+        ll top = dp[i - 1][j];
+
+        dp[i][j] = ((left % mod) + (top % mod)) % mod;
+      }
+    }
+  }
+
+  cout << dp[h - 1][w - 1] << endl;
+}

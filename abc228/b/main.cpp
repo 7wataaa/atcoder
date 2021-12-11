@@ -5,6 +5,26 @@ using ll = long long int;
 
 template <class T> using V = std::vector<T>;
 
+template <typename T>
+std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
+  for (ll i = 0; i < v.size(); i++) {
+    stream << v[i];
+
+    if (i != v.size() - 1) {
+      stream << ' ';
+    }
+  }
+
+  return stream;
+}
+
+template <typename T, typename V>
+std::ostream &operator<<(std::ostream &stream, const pair<T, V> p) {
+  stream << "(" << p.first << ", " << p.second << ")";
+
+  return stream;
+}
+
 #define _GLIBCXX_DEBUG
 
 #define rep(i, m, n) for (ll i = (m); (i) < (ll)(n); ++(i))

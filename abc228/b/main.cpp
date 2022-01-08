@@ -3,8 +3,7 @@
 using namespace std;
 using ll = long long int;
 
-template <class T>
-using V = std::vector<T>;
+template <class T> using V = std::vector<T>;
 
 template <typename T>
 std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
@@ -51,8 +50,7 @@ bool isSameCharAll(string str) {
   return (str.find_first_not_of(str[0]) == string::npos);
 }
 
-template <class T>
-inline bool chmin(T &a, T b) {
+template <class T> inline bool chmin(T &a, T b) {
   if (a > b) {
     a = b;
     return true;
@@ -60,8 +58,7 @@ inline bool chmin(T &a, T b) {
   return false;
 }
 
-template <class T>
-inline bool chmax(T &a, T b) {
+template <class T> inline bool chmax(T &a, T b) {
   if (a < b) {
     a = b;
     return true;
@@ -70,6 +67,31 @@ inline bool chmax(T &a, T b) {
 }
 
 int main() {
-  
-}
+  ll n, x;
+  cin >> n >> x;
 
+  // 自分の位置､目標､すでに知っているか
+  V<tuple<ll, ll, bool>> vec(n);
+
+  tuple<ll, ll, bool> next;
+
+  rep(i, 0, n) {
+    ll a;
+    cin >> a;
+    vec[i] = {i, a - 1, false};
+    if ((i + 1) == x) {
+      next = vec[i];
+    }
+  }
+
+  ll ans = 0;
+
+  while (!get<2>(next)) {
+    vec[get<0>(next)] = {get<0>(next), get<1>(next), true};
+
+    next = vec[get<1>(next)];
+    ans++;
+  }
+
+  std::cout << ans << endl;
+}

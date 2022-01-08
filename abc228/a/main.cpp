@@ -67,5 +67,18 @@ template <class T> inline bool chmax(T &a, T b) {
 }
 
 int main() {
+  ll s, t, x;
+  cin >> s >> t >> x;
 
+  if (s <= t) {
+    if (s <= x && x < t) {
+      cout << "Yes" << endl;
+    } else {
+      cout << "No" << endl;
+    }
+  } else if ((s <= x && x <= 23) || (x < t)) {
+    cout << "Yes" << endl;
+  } else {
+    cout << "No" << endl;
+  }
 }

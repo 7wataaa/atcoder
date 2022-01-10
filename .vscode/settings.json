@@ -6,6 +6,10 @@
     "utility": "cpp",
     "variant": "cpp",
     "*.tcc": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "algorithm": "cpp",
+    "fstream": "cpp",
+    "functional": "cpp",
+    "ios": "cpp"
   }
 }

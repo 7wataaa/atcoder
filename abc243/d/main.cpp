@@ -31,6 +31,7 @@ std::ostream &operator<<(std::ostream &stream, const pair<T, V> p) {
 
 #define endl '\n'
 #define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
 #define fs first
 #define sc second
 #define pb push_back
@@ -112,21 +113,35 @@ int main() {
   string s;
   cin >> n >> x >> s;
 
-  ll mod = pow(10, 18) + 1;
-  ll a = 0;
+  stack<char> strStack;
 
-  for (ll i = 0; i < n; i++) {
+  for (ll i = 0; i < s.size(); i++) {
+    if (strStack.size() != 0 && s[i] == 'U' &&
+        (strStack.top() == 'R' || strStack.top() == 'L')) {
+      strStack.pop();
+    } else {
+      strStack.push(s[i]);
+    }
+  }
+
+  string reverse_s;
+
+  while (!strStack.empty()) {
+    char c = strStack.top();
+    strStack.pop();
+
+    reverse_s.pb(c);
+  }
+
+  s = string(rall(reverse_s));
+
+  for (ll i = 0; i < s.size(); i++) {
     if (s[i] == 'U') {
-      x = ((mod * a) + x) / 2;
-      a = 0;
+      x = x / 2;
     } else if (s[i] == 'L') {
-      a += (2 * x) / mod;
-
-      x = (2 * x) % mod;
+      x = 2 * x;
     } else if (s[i] == 'R') {
-      a += ((2 * x) + 1) / mod;
-
-      x = ((2 * x) + 1) % mod;
+      x = (2 * x) + 1;
     }
   }
 

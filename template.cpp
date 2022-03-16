@@ -31,6 +31,7 @@ std::ostream &operator<<(std::ostream &stream, const pair<T, V> p) {
 
 #define endl '\n'
 #define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
 #define fs first
 #define sc second
 #define pb push_back

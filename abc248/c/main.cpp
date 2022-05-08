@@ -109,5 +109,19 @@ ll pow_mod(ll n, ll k, ll mod) {
 }
 
 int main() {
-  
+  ll n, m, k;
+  cin >> n >> m >> k;
+
+  V<V<ll>> dp(n, V<ll>(k, 0));
+  dp[0][0] = 1;
+
+  for (ll i = 0; i < n; i++) {
+    for (ll sum = 0; sum < k; sum++) {
+      for (ll nxt = 0; nxt < m; nxt++) {
+        dp[i + 1][sum + nxt] += dp[i][sum];
+      }
+    }
+  }
+
+  cout << accumulate(all(dp[n]), 0) << endl;
 }

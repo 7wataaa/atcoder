@@ -91,5 +91,7 @@
     "unordered_set": "cpp",
     "valarray": "cpp",
     "vector": "cpp"
-  }
+  },
+  "editor.defaultFormatter": "ms-vscode.cpptools",
+  "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: LLVM, AllowShortFunctionsOnASingleLine: None, TabWidth: 4,}"
 }

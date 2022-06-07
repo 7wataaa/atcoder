@@ -97,4 +97,10 @@ V<ll> vllin(ll &n) {
 }
 
 int main() {
+  ll a = llin, b = llin, c = llin;
+
+  V<ll> v = {a, b, c};
+  sort(all(v));
+
+  cout << (v[1] == b ? "Yes" : "No") << endl;
 }

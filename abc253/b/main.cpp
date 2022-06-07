@@ -95,6 +95,73 @@ V<ll> vllin(ll &n) {
   }
   return vec;
 }
+bool isInside(ll h, ll w, ll x, ll y) {
+  return 0 <= x && x < w && 0 <= y && y < h;
+}
 
 int main() {
+  ll h = llin, w = llin;
+
+  struct Q {
+    ll x;
+    ll y;
+    ll dist;
+  };
+
+  queue<Q> que;
+
+  V<V<char>> vec(h, V<char>(w));
+
+  char goal = 'a';
+  Q a;
+  Q b;
+
+  for (ll i = 0; i < h; i++) {
+    for (ll j = 0; j < w; j++) {
+      char c = llin;
+      if (c == 'o') {
+        Q q;
+        q.x = j;
+        q.y = i;
+        q.dist = 0;
+        que.push(q);
+      }
+      vec[i][j] = goal;
+      if (goal == 'a') {
+        a.x = j;
+        a.y = i;
+      } else {
+        b.x = j;
+        b.y = i;
+      }
+      goal++;
+    }
+  }
+
+  V<V<ll>> dist(h, V<ll>(w));
+
+  while (!que.empty()) {
+    auto p = que.front();
+    que.pop();
+
+    if (vec[p.y][p.x] == 'a' && (p.y != a.y && p.x != a.x)) {
+      cout << p.dist << endl;
+      return 0;
+    } else if (vec[p.y][p.x] == 'b' && (p.y != b.y && p.x != b.x)) {
+      cout << p.dist << endl;
+      return 0;
+    }
+
+    dist[p.y][p.x] = p.dist;
+
+    for (ll i = 0; i < 4; i++) {
+      Q newQ;
+      newQ.x = p.x + d[i + 1];
+      newQ.y = p.y + d[i];
+      newQ.dist = p.dist + 1;
+      if (isInside(h, w, newQ.x, newQ.y)) {
+        que.push(newQ);
+      }
+    }
+  }
 }

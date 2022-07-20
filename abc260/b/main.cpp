@@ -7,7 +7,7 @@ std::ostream &operator<<(std::ostream &stream, const vector<T> v) {
   for (ll i = 0; i < v.size(); i++) {
     stream << v[i];
     if (i != v.size() - 1) {
-      stream << ' ';
+      stream << '\n';
     }
   }
   return stream;
@@ -102,5 +102,80 @@ string strin() {
 }
 
 int main() {
-  
+  ll n = llin, x = llin, y = llin, z = llin;
+  V<ll> A = vllin(n);
+  V<ll> B = vllin(n);
+
+  struct StudentData {
+    ll mathScore;
+    ll englishScore;
+    ll minusIndex;
+  };
+
+  V<ll> successfulExamineeIndex;
+
+  deque<StudentData> allStudentData(n);
+  for (ll i = 0; i < n; i++) {
+    StudentData studentData;
+    studentData.mathScore = A[i];
+    studentData.englishScore = B[i];
+    studentData.minusIndex = -(i + 1);
+
+    allStudentData[i] = studentData;
+  }
+
+  // mathScore降順
+  sort(all(allStudentData), [](StudentData const &l, StudentData const &r) {
+    if (l.mathScore == r.mathScore) {
+      return l.minusIndex > r.minusIndex;
+    }
+
+    return l.mathScore > r.mathScore;
+  });
+
+  // x個移動させる
+  for (ll i = 0; i < x; i++) {
+    StudentData top = allStudentData.front();
+    allStudentData.pop_front();
+
+    successfulExamineeIndex.pb(-top.minusIndex);
+  }
+
+  // englishScore降順
+  sort(all(allStudentData), [](StudentData const &l, StudentData const &r) {
+    if (l.englishScore == r.englishScore) {
+      return l.minusIndex > r.minusIndex;
+    }
+
+    return l.englishScore > r.englishScore;
+  });
+
+  // y個移動させる
+  for (ll i = 0; i < y; i++) {
+    StudentData top = allStudentData.front();
+    allStudentData.pop_front();
+
+    successfulExamineeIndex.pb(-top.minusIndex);
+  }
+
+  // 合計 降順
+  sort(all(allStudentData), [](StudentData const &l, StudentData const &r) {
+    if (l.englishScore + l.mathScore == r.englishScore + r.mathScore) {
+      return l.minusIndex > r.minusIndex;
+    }
+
+    return l.englishScore + l.mathScore > r.englishScore + r.mathScore;
+  });
+
+  // z個移動させる
+  for (ll i = 0; i < z; i++) {
+    StudentData top = allStudentData.front();
+    allStudentData.pop_front();
+
+    successfulExamineeIndex.pb(-top.minusIndex);
+  }
+
+  sort(all(successfulExamineeIndex));
+
+  cout << successfulExamineeIndex << endl;
 }

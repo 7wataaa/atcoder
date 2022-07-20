@@ -102,5 +102,26 @@ string strin() {
 }
 
 int main() {
-  
+  string str = strin();
+
+  set<char> st;
+
+  if (isSameCharAll(str)) {
+    cout << -1 << endl;
+    return 0;
+  }
+
+  for (auto c : str) {
+    if (st.find(c) != st.end()) {
+      st.erase(c);
+    } else {
+      st.ins(c);
+    }
+  }
+
+  if (st.begin() == st.end()) {
+    cout << -1 << endl;
+  } else {
+    cout << *st.begin() << endl;
+  }
 }

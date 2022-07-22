@@ -100,7 +100,30 @@ string strin() {
   cin >> str;
   return str;
 }
+ll X;
+ll Y;
+
+pair<ll, ll> func(ll r, ll b) {
+  b += r * X;
+  r += b;
+  b *= Y;
+
+  return {r, b};
+}
 
 int main() {
-  
+  ll n = llin;
+  X = llin;
+  Y = llin;
+
+  ll r = 1, b = 0;
+
+  for (ll i = 0; i < n - 1; i++) {
+    pair<ll, ll> newPair = func(r, b);
+
+    r = newPair.fs;
+    b = newPair.sc;
+  }
+
+  cout << b << endl;
 }

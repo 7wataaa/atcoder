@@ -2,12 +2,13 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "cppbuild",
-      "label": "C/C++: g++ アクティブなファイルのビルド",
-      "command": "/usr/local/bin/g++",
+      "type": "shell",
+      "label": "C/C++: clang++ アクティブなファイルのビルド",
+      "command": "/usr/bin/clang++",
       "args": [
+        "-fcolor-diagnostics",
+        "-fansi-escape-codes",
         "-std=gnu++17",
-        "-fdiagnostics-color=always",
         "-g",
         "${file}",
         "-o",
@@ -16,11 +17,18 @@
       "options": {
         "cwd": "${fileDirname}"
       },
-      "problemMatcher": [
-        "$gcc"
-      ],
-      "group": "build",
-      "detail": "コンパイラ: /usr/local/bin/g++"
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "デバッガーによって生成されたタスク。"
+    },
+    {
+      "label": "Open Terminal",
+      "type": "shell",
+      "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'",
+      "problemMatcher": []
     }
   ]
 }

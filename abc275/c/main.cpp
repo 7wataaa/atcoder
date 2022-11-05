@@ -102,5 +102,13 @@ string strin() {
 }
 
 int main() {
-  
+  V<V<char>> vec;
+  for (ll i = 0; i < 9; i++) {
+    string in = strin();
+    V<char> v;
+    for (auto c : in) {
+      v.pb(c);
+    }
+    vec.pb(v);
+  }
 }

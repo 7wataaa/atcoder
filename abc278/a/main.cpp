@@ -18,6 +18,14 @@ std::ostream &operator<<(std::ostream &stream, const pair<T, V> p) {
   stream << p.first << " " << p.second;
   return stream;
 }
+template <class T>
+std::ostream &operator<<(std::ostream &stream, const deque<T> p) {
+  for (auto t : p) {
+    stream << t << ' ';
+  }
+
+  return stream;
+}
 #define _GLIBCXX_DEBUG
 #define rep(i, m, n) for (ll i = (m); (i) < (ll)(n); ++(i))
 #define endl '\n'
@@ -102,5 +110,14 @@ string strin() {
 }
 
 int main() {
-  
+  ll n = llin, k = llin;
+  V<ll> vecA = vllin(n);
+  deque<ll> A = {vecA.begin(), vecA.end()};
+
+  for (ll i = 0; i < k; i++) {
+    A.pop_front();
+    A.push_back(0);
+  }
+
+  cout << A << endl;
 }

@@ -101,6 +101,13 @@ string strin() {
   return str;
 }
 
+bool judge(ll h, ll m) {
+  return false;
+}
+
 int main() {
-  
+  ll h = llin, m = llin;
+
+  while (!judge(h, m)) {
+  }
 }
